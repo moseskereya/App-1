@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Slide from 'react-reveal/Slide';
 import axios from "axios"
 class App1 extends Component {
     constructor(props) {
         super(props);
         this.state = { 
+            letters: [],
             StartWith:'',
             include:'',
             endsWith:'',
@@ -15,22 +17,25 @@ class App1 extends Component {
     changeHandler = (e) =>{
         this.setState({[e.target.name] : e.target.value})
     }
-
     submitHandler = (e) =>{
         e.preventDefault();
         console.log(this.state);
         axios.post('https://wordfind.azurewebsites.net/api/English?code=8IZqWCIZi3kVDCXhQnmyvh0EKHvaQsVWN5kJjLnqR4ss4og5HzTL3Q==', this.state)
         .then( response =>{
             console.log(response)
+            this.setState({letters: response.data})
         })
+
         .then( error =>{
             console.log(error)
         })
     }
+
     render() { 
-        const { StartWith , endsWith , include , WordMaxLength , WordMinLength} = this.state
+        const { letters , StartWith , endsWith , include , WordMaxLength , WordMinLength } = this.state
         return ( 
-            <div className="App1">
+            <div>
+                <div className="App1">
                 <form onSubmit={this.submitHandler}>
                     <div>
                          <label htmlFor="StartWith">StartWith</label>
@@ -72,6 +77,14 @@ class App1 extends Component {
                     <br/>
                     <button type="submit">Submit</button>
                 </form>
+                </div>
+                <Slide left>
+                <ul className="letter-list">
+                {letters.length ?
+                letters.map( letter => <li  key={letter.id}>{letter}</li>) : null
+                }
+                </ul>
+                </Slide>
             </div>
          );
     }
