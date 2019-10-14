@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Slide from 'react-reveal/Slide';
 import axios from "axios"
 class App1 extends Component {
     constructor(props) {
@@ -78,13 +77,24 @@ class App1 extends Component {
                     <button type="submit">Submit</button>
                 </form>
                 </div>
-                <Slide left>
-                <ul className="letter-list">
+                <div>
+                 <div>
+                <ul className="Slide">
                 {letters.length ?
-                letters.map( letter => <li  key={letter.id}>{letter}</li>) : null
-                }
+                letters.map(letter => (
+                    <div className="slide-2">
+                    <span className="inner-slide">
+                         <article className="inner-2">
+                             {letter}
+                         </article>  
+                    </span>
+                    </div>
+                )):null
+                } 
                 </ul>
-                </Slide>
+               </div>
+               
+                </div>
             </div>
          );
     }
