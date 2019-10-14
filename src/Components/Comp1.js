@@ -40,7 +40,7 @@ class App1 extends Component {
                          <label htmlFor="StartWith">StartWith</label>
                         <input type="text" name="StartWith" value={StartWith}
                         onChange={this.changeHandler}
-                      placeholder="C"
+                      placeholder="C/M/B/D/J/L/P"
                         />
                     </div>
                     <label htmlFor="endsWith">endsWith</label>
